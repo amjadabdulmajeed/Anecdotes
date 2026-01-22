@@ -1,4 +1,4 @@
-// Exercise 1.12: Anecdotes Step 1
+ 
 import { useState } from "react";
 
 const App = () => {
@@ -14,15 +14,25 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState([0, 0, 0, 0, 0, 0, 0, 0]);
+  console.log(votes);
 
   const handleNext = () => {
     const randomIndex = Math.floor(Math.random() * anecdotes.length);
     setSelected(randomIndex);
   };
 
+  const handleVote = () => {
+    const copy = [...votes];
+    copy[selected] += 1;
+    setVotes(copy);
+  };
+
   return (
     <>
       <div>{anecdotes[selected]}</div>
+      <p>has {votes[selected]} votes</p>
+      <button onClick={handleVote}>vote</button>
       <button onClick={handleNext}>next anecdote</button>
     </>
   );
